@@ -1,9 +1,7 @@
 package com.leaftaps.ui.base;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Properties;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -20,19 +18,22 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class ProjectSpecificMethod {
 	public RemoteWebDriver driver;
 	public String excelFileName;
-	public static Properties property;
+//	public static Properties property;
 
 	
 	
 	@Parameters({"browserName","URL"})
 	@BeforeMethod
-	public void startBrowser(/*String browserName, String url*/) throws Exception {
+	public void startBrowser(String browserName, String url) {
 		
+		/*
 		//getting App Config
 		Properties prop = new Properties();
 		FileInputStream file = new FileInputStream("./config/AppConfig.properties");
 		prop.load(file);
 		String browserName = prop.getProperty("browserName");
+		*/
+		
 		
 		if(browserName.equals("Chrome")) {
 			WebDriverManager.chromedriver().setup();
@@ -45,14 +46,16 @@ public class ProjectSpecificMethod {
 		driver.manage().window().maximize();
 		
 		//getting url from property file 
-		driver.get(prop.getProperty("URL"));
+		driver.get(URL));
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		
+		
+		/*
 		//getting Language Config
 		property = new Properties();
 		FileInputStream file1 = new FileInputStream("./config/"+prop.getProperty("language")+".properties");
 		property.load(file1);
-		
+		*/
 		
 	}
 	@AfterMethod
